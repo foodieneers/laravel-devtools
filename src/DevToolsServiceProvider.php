@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Foodieneers\DevTools;
 
-use Spatie\LaravelPackageTools\Package;
 use Foodieneers\DevTools\Commands\DevToolsCommand;
+use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class DevToolsServiceProvider extends PackageServiceProvider
+final class DevToolsServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
