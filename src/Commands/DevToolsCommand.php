@@ -22,18 +22,17 @@ final class DevToolsCommand extends Command
     {
         $projectRoot = base_path();
         $stubsPath = realpath(__DIR__.'/../../stubs');
-
+        
         foreach ($this->files as $sourceRelative => $destRelative) {
             $source = $stubsPath.'/'.$sourceRelative;
             $dest = $projectRoot.'/'.$destRelative;
 
             if (! File::exists($source)) {
                 $this->warn("Missing source file: {$sourceRelative} ({$source})");
-
                 continue;
             }
-
             if (File::exists($dest) && ! $this->option('force')) {
+                
                 if (! $this->confirm("File {$destRelative} already exists. Overwrite?", false)) {
                     $this->line("Skipping {$destRelative}...");
 
