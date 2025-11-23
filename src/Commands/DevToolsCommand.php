@@ -14,8 +14,8 @@ final class DevToolsCommand extends Command
     protected $description = 'Copy devtool config files from the package into this project';
 
     protected array $files = [
-        'pint.json'        => 'pint.json',
-        'peck.json'     => 'peck.json',
+        'pint.json' => 'pint.json',
+        'peck.json' => 'peck.json',
     ];
 
     public function handle(): int
@@ -25,17 +25,18 @@ final class DevToolsCommand extends Command
 
         foreach ($this->files as $sourceRelative => $destRelative) {
             $source = $stubsPath.'/'.$sourceRelative;
-            $dest   = $projectRoot.'/'.$destRelative;
-            
+            $dest = $projectRoot.'/'.$destRelative;
+
             if (! File::exists($source)) {
                 $this->warn("Missing source file: {$sourceRelative} ({$source})");
+
                 continue;
             }
-
 
             if (File::exists($dest) && ! $this->option('force')) {
                 if (! $this->confirm("File {$destRelative} already exists. Overwrite?", false)) {
                     $this->line("Skipping {$destRelative}...");
+
                     continue;
                 }
             }

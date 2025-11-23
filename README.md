@@ -1,11 +1,6 @@
-# Laravel package for dev tools 
+# Laravel package for dev tools
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/foodieneers/laravel-devtools.svg?style=flat-square)](https://packagist.org/packages/foodieneers/laravel-devtools)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/foodieneers/laravel-devtools/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/foodieneers/laravel-devtools/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/foodieneers/laravel-devtools/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/foodieneers/laravel-devtools/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/foodieneers/laravel-devtools.svg?style=flat-square)](https://packagist.org/packages/foodieneers/laravel-devtools)
-
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+All the php tooling and laravel tooling for handling applicatios development.
 
 ## Support us
 
@@ -20,40 +15,25 @@ We highly appreciate you sending us a postcard from your hometown, mentioning wh
 You can install the package via composer:
 
 ```bash
-composer require foodieneers/laravel-devtools
+composer require foodieneers/laravel-devtools --dev
 ```
 
-You can publish and run the migrations with:
+You can publish all the tooling configs as:
 
 ```bash
-php artisan vendor:publish --tag="laravel-devtools-migrations"
-php artisan migrate
+php artisan publish:devtools
 ```
 
-You can publish the config file with:
+## Instructions
+
+### Laravel Pint
 
 ```bash
-php artisan vendor:publish --tag="laravel-devtools-config"
+./vendor/bin/pint
 ```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
-Optionally, you can publish the views using
 
 ```bash
-php artisan vendor:publish --tag="laravel-devtools-views"
-```
-
-## Usage
-
-```php
-$devTools = new Foodieneers\DevTools();
-echo $devTools->echoPhrase('Hello, Foodieneers!');
+./vendor/bin/peck
 ```
 
 ## Testing
