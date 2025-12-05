@@ -6,10 +6,13 @@ use Illuminate\Support\Facades\File;
 
 beforeEach(function () {
     $this->projectRoot = base_path();
+    
     $this->filePath = __DIR__;
+
 
     File::delete($this->projectRoot.'/pint.json');
     File::delete($this->projectRoot.'/peck.json');
+    File::delete($this->projectRoot.'/phpstan.neon');
 });
 
 it('copies config files from stub when they do not exist in the project', function () {

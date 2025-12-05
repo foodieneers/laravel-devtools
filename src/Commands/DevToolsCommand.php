@@ -16,6 +16,7 @@ final class DevToolsCommand extends Command
     protected array $files = [
         'pint.json' => 'pint.json',
         'peck.json' => 'peck.json',
+        'phpstan.neon' => 'phpstan.neon',
     ];
 
     public function handle(): int
