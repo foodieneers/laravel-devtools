@@ -9,13 +9,15 @@ use Illuminate\Support\Facades\File;
 
 final class DevToolsCommand extends Command
 {
-    protected $signature = 'publish:devtools {--force : Overwrite existing files without asking}';
+    protected $signature = 'publish:devtools
+                            {--force : Overwrite existing files without asking}
+                            {--ask : Ask before overwriting files}';
 
     protected $description = 'Copy devtool config files from the package into this project';
 
     protected array $files = [
-        'pint.json' => 'pint.json',
-        'peck.json' => 'peck.json',
+        'pint' => 'pint.json',
+        'peck' => 'peck.json',
         'phpstan' => 'phpstan.neon',
     ];
 
@@ -24,32 +26,42 @@ final class DevToolsCommand extends Command
         $projectRoot = base_path();
         $stubsPath = realpath(__DIR__.'/../../stubs');
 
-        foreach ($this->files as $sourceRelative => $destRelative) {
-            $source = $stubsPath.'/'.$sourceRelative;
-            $dest = $projectRoot.'/'.$destRelative;
+        foreach ($this->files as $source => $destination) {
+            $sourcePath = implode(DIRECTORY_SEPARATOR, [$stubsPath, $source]);
+            $destinationPath = implode(DIRECTORY_SEPARATOR, [$projectRoot, $destination]);
 
-            if (! File::exists($source)) {
-                $this->warn("Missing source file: {$sourceRelative} ({$source})");
+            if (File::exists($destinationPath)) {
+
+                if ($this->option('force')) {
+                    $this->overwrite($sourcePath, $destinationPath, $destination);
+
+                    continue;
+                }
+
+                if ($this->option('ask')) {
+                    if ($this->confirm("File {$destination} already exists. Overwrite?", false)) {
+                        $this->overwrite($sourcePath, $destinationPath, $destination);
+
+                        continue;
+                    }
+                }
+
+                $this->line("Skipping existing {$destination}...");
 
                 continue;
             }
 
-            if (File::exists($dest) && ! $this->option('force')) {
-
-                if (! $this->confirm("File {$destRelative} already exists. Overwrite?", false)) {
-                    $this->line("Skipping {$destRelative}...");
-
-                    continue;
-                }
-            }
-
-            $this->info("Copying: {$sourceRelative} to {$destRelative}");
-            File::ensureDirectoryExists(dirname($dest));
-            File::copy($source, $dest);
+            $this->overwrite($sourcePath, $destinationPath, $destination);
         }
 
         $this->info('Devtools publishing completed ✅');
 
         return self::SUCCESS;
+    }
+
+    private function overwrite(string $sourcePath, string $destinationPath, string $destination): void
+    {
+        $this->info("Publishing: {$destination}");
+        File::copy($sourcePath, $destinationPath);
     }
 }
