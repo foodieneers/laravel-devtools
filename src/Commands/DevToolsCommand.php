@@ -15,10 +15,11 @@ final class DevToolsCommand extends Command
 
     protected $description = 'Copy devtool config files from the package into this project';
 
-    protected array $files = [
+    private array $files = [
         'pint' => 'pint.json',
         'peck' => 'peck.json',
         'phpstan' => 'phpstan.neon',
+        'rector' => 'rector.php',
     ];
 
     public function handle(): int
@@ -38,12 +39,10 @@ final class DevToolsCommand extends Command
                     continue;
                 }
 
-                if ($this->option('ask')) {
-                    if ($this->confirm("File {$destination} already exists. Overwrite?", false)) {
-                        $this->overwrite($sourcePath, $destinationPath, $destination);
+                if ($this->option('ask') && $this->confirm("File {$destination} already exists. Overwrite?", false)) {
+                    $this->overwrite($sourcePath, $destinationPath, $destination);
 
-                        continue;
-                    }
+                    continue;
                 }
 
                 $this->line("Skipping existing {$destination}...");

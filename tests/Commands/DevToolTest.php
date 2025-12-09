@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 use function Pest\Laravel\artisan;
 
-it('copies files when they do not exist', function () {
+it('copies files when they do not exist', function (): void {
     File::shouldReceive('exists')->andReturn(false);
     File::shouldReceive('copy');
 
@@ -15,7 +15,7 @@ it('copies files when they do not exist', function () {
         ->assertSuccessful();
 });
 
-it('skips files when they exist and no flags are given', function () {
+it('skips files when they exist and no flags are given', function (): void {
     File::shouldReceive('exists')->andReturn(true);
 
     File::shouldReceive('copy')->never();
@@ -27,7 +27,7 @@ it('skips files when they exist and no flags are given', function () {
         ->assertSuccessful();
 });
 
-it('asks before overwriting when --ask is used', function () {
+it('asks before overwriting when --ask is used', function (): void {
     File::shouldReceive('exists')->andReturn(true);
 
     File::shouldReceive('copy')->times(1);
@@ -36,10 +36,11 @@ it('asks before overwriting when --ask is used', function () {
         ->expectsQuestion('File pint.json already exists. Overwrite?', false)
         ->expectsQuestion('File peck.json already exists. Overwrite?', true)
         ->expectsQuestion('File phpstan.neon already exists. Overwrite?', false)
+        ->expectsQuestion('File rector.php already exists. Overwrite?', false)
         ->assertSuccessful();
 });
 
-it('forces overwrite with --force', function () {
+it('forces overwrite with --force', function (): void {
     File::shouldReceive('exists')->andReturn(true);
 
     File::shouldReceive('copy');
