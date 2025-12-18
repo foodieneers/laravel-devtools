@@ -7,7 +7,7 @@ namespace Foodieneers\DevTools\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
-final class DevToolsCommand extends Command
+final class PublishDevTools extends Command
 {
     protected $signature = 'publish:devtools
                             {--force : Overwrite existing files without asking}
