@@ -19,7 +19,7 @@ return [
     ],
 
     'pest' => 'pest',
-    
+
     'test:unit' => 'pest --parallel --coverage --exactly=100.0',
 
     'test:types' => 'phpstan',
