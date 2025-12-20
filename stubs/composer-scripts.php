@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 return [
-    'bump' => [
+    'deps:bump' => [
         'composer bump',
         'npx npm-check-updates -u',
     ],
