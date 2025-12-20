@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\File;
 
 use function Pest\Laravel\artisan;
 
-
 beforeEach(function (): void {
     $this->tmpBase = storage_path('framework/testing/tmp-'.uniqid('', true));
     $this->scripts = require __DIR__.'/../../stubs/composer-scripts.php';
