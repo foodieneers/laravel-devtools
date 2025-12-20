@@ -3,7 +3,11 @@
 declare(strict_types=1);
 
 return [
-
+    'bump' => [
+        'composer bump',
+        'npx npm-check-updates -u'
+    ],
+    
     'lint' => [
         'rector',
         'pint --parallel',
