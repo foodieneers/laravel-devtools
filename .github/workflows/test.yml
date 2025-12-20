@@ -1,0 +1,70 @@
+name: tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.5
+          tools: composer:v2
+          coverage: xdebug
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          
+      - name: Install Dependencies
+        env:
+          COMPOSER_AUTH: >
+            {"github-oauth": {"github.com": "${{ secrets.GH_COMPOSER_SECRET }}"}}
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+        
+      - name: Copy Environment File
+        run: cp .env.example .env
+
+      - name: Generate Application Key
+        run: php artisan key:generate
+
+      - name: Install Node Dependencies
+        run: npm install
+
+      - name: Build Assets
+        run: npm run build
+
+      - name: Prepare PHPStan cache directory
+        run: mkdir -p storage/tmp/phpstan
+
+      - name: PHPStan Cache
+        uses: actions/cache@v4
+        with:
+          path: storage/tmp/phpstan
+          key: ${{ runner.os }}-phpstan-${{ hashFiles('composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-phpstan-
+
+      - name: Test Lint
+        run: composer test:lint 
+
+      - name: Test Types
+        run: composer test:types 
+      
+      - name: Test Type-Coverage
+        run: composer test:type-coverage
+         
+      - name: Test Unit
+        run: composer test:unit 
