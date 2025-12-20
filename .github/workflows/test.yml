@@ -29,9 +29,6 @@ jobs:
           node-version: '22'
           
       - name: Install Dependencies
-        env:
-          COMPOSER_AUTH: >
-            {"github-oauth": {"github.com": "${{ secrets.GH_COMPOSER_SECRET }}"}}
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
         
       - name: Copy Environment File
