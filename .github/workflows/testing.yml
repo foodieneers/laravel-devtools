@@ -1,0 +1,63 @@
+name: testing
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.5
+          tools: composer:v2
+          coverage: xdebug
+
+      # Composer cache (speed)
+      - name: Get Composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Composer Cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install Dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Prepare PHPStan cache directory
+        run: mkdir -p storage/tmp/phpstan
+
+      - name: PHPStan Cache
+        uses: actions/cache@v4
+        with:
+          path: storage/tmp/phpstan
+          key: ${{ runner.os }}-phpstan-${{ hashFiles('**/composer.lock', '**/phpstan.neon*') }}
+          restore-keys: |
+            ${{ runner.os }}-phpstan-
+
+      - name: Test Lint
+        run: composer test:lint
+
+      - name: Test Types
+        run: composer test:types
+
+      - name: Test Type-Coverage
+        run: composer test:type-coverage
+
+      - name: Test Unit
+        run: composer test:unit
