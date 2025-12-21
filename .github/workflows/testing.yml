@@ -1,4 +1,4 @@
-name: testing
+name: Package Full Test Analysis
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  ci:
+  package-tests:
     runs-on: ubuntu-latest
 
     steps:
