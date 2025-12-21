@@ -39,8 +39,10 @@ jobs:
       - name: Install Dependencies
         run: composer install --no-interaction --prefer-dist --no-progress
 
-      - name: Prepare PHPStan cache directory
-        run: mkdir -p storage/tmp/phpstan
+      - name: Prepare testing cache directory
+        run: |
+            mkdir -p storage/tmp/phpstan
+            mkdir -p storage/tmp/rector
 
       - name: PHPStan Cache
         uses: actions/cache@v4
