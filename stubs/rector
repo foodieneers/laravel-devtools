@@ -8,7 +8,7 @@ use RectorLaravel\Set\LaravelSetList;
 use RectorLaravel\Set\LaravelSetProvider;
 use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
-use Rector\TypeDeclaration\Rector\ClassMethod\AddVoidReturnTypeWhereNoReturnRector;
+use Rector\TypeDeclaration\Rector\Closure\AddClosureVoidReturnTypeWhereNoReturnRector;
 
 return RectorConfig::configure()
     ->withPhpVersion(PhpVersion::PHP_85)
@@ -44,7 +44,7 @@ return RectorConfig::configure()
     ])
     ->withSkip([
         AddOverrideAttributeToOverriddenMethodsRector::class,
-        AddVoidReturnTypeWhereNoReturnRector::class => [
+        AddClosureVoidReturnTypeWhereNoReturnRector::class => [
             __DIR__ . '/tests',
         ],
     ])

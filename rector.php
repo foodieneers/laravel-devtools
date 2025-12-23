@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\Config\RectorConfig;
-use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
 use Rector\ValueObject\PhpVersion;
 use RectorLaravel\Set\LaravelSetList;
 use RectorLaravel\Set\LaravelSetProvider;
+use Rector\Caching\ValueObject\Storage\FileCacheStorage;
+use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
+use Rector\TypeDeclaration\Rector\Closure\AddClosureVoidReturnTypeWhereNoReturnRector;
 
 return RectorConfig::configure()
     ->withPhpVersion(PhpVersion::PHP_85)
@@ -38,6 +39,9 @@ return RectorConfig::configure()
     ])
     ->withSkip([
         AddOverrideAttributeToOverriddenMethodsRector::class,
+        AddClosureVoidReturnTypeWhereNoReturnRector::class => [
+            __DIR__.'/tests',
+        ],
     ])
     ->withPreparedSets(
         deadCode: true,
