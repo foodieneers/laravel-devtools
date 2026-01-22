@@ -44,6 +44,9 @@ return RectorConfig::configure()
     ])
     ->withSkip([
         AddOverrideAttributeToOverriddenMethodsRector::class,
+        StaticCallOnNonStaticToInstanceCallRector::class,
+        RemoveUnusedPrivateMethodRector::class,
+        PrivatizeFinalClassMethodRector::class,        
         AddClosureVoidReturnTypeWhereNoReturnRector::class => [
             __DIR__ . '/tests',
         ],
