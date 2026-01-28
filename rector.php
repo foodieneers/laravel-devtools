@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\Config\RectorConfig;
+use Rector\DeadCode\Rector\ClassMethod\RemoveUnusedPrivateMethodRector;
+use Rector\Php70\Rector\StaticCall\StaticCallOnNonStaticToInstanceCallRector;
 use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
+use Rector\Privatization\Rector\ClassMethod\PrivatizeFinalClassMethodRector;
+use Rector\Privatization\Rector\Property\PrivatizeFinalClassPropertyRector;
 use Rector\TypeDeclaration\Rector\Closure\AddClosureVoidReturnTypeWhereNoReturnRector;
 use Rector\ValueObject\PhpVersion;
 use RectorLaravel\Set\LaravelSetList;
@@ -38,6 +42,12 @@ return RectorConfig::configure()
         __DIR__.'/tests',
     ])
     ->withSkip([
+        StaticCallOnNonStaticToInstanceCallRector::class,
+        RemoveUnusedPrivateMethodRector::class,
+        PrivatizeFinalClassMethodRector::class,
+        PrivatizeFinalClassPropertyRector::class => [
+            __DIR__.'/src/Models/*',
+        ],
         AddOverrideAttributeToOverriddenMethodsRector::class,
         AddClosureVoidReturnTypeWhereNoReturnRector::class => [
             __DIR__.'/tests',

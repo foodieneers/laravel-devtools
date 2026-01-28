@@ -2,13 +2,17 @@
 
 declare(strict_types=1);
 
+use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\Config\RectorConfig;
+use Rector\DeadCode\Rector\ClassMethod\RemoveUnusedPrivateMethodRector;
+use Rector\Php70\Rector\StaticCall\StaticCallOnNonStaticToInstanceCallRector;
+use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
+use Rector\Privatization\Rector\ClassMethod\PrivatizeFinalClassMethodRector;
+use Rector\Privatization\Rector\Property\PrivatizeFinalClassPropertyRector;
+use Rector\TypeDeclaration\Rector\ClassMethod\AddVoidReturnTypeWhereNoReturnRector;
 use Rector\ValueObject\PhpVersion;
 use RectorLaravel\Set\LaravelSetList;
 use RectorLaravel\Set\LaravelSetProvider;
-use Rector\Caching\ValueObject\Storage\FileCacheStorage;
-use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
-use Rector\TypeDeclaration\Rector\Closure\AddClosureVoidReturnTypeWhereNoReturnRector;
 
 return RectorConfig::configure()
     ->withPhpVersion(PhpVersion::PHP_85)
@@ -34,8 +38,9 @@ return RectorConfig::configure()
         cacheClass: FileCacheStorage::class,
     )
     ->withPaths([
-        __DIR__.'/app',
         __DIR__.'/bootstrap/app.php',
+        __DIR__.'/app',
+        __DIR__.'/app-modules',
         __DIR__.'/config',
         __DIR__.'/database',
         __DIR__.'/public',
@@ -44,8 +49,15 @@ return RectorConfig::configure()
     ])
     ->withSkip([
         AddOverrideAttributeToOverriddenMethodsRector::class,
-        AddClosureVoidReturnTypeWhereNoReturnRector::class => [
-            __DIR__ . '/tests',
+        StaticCallOnNonStaticToInstanceCallRector::class,
+        RemoveUnusedPrivateMethodRector::class,
+        PrivatizeFinalClassMethodRector::class,
+        PrivatizeFinalClassPropertyRector::class => [
+            __DIR__.'/app/Models/*',
+        ],
+        AddVoidReturnTypeWhereNoReturnRector::class => [
+            __DIR__.'/tests',
+            __DIR__.'/app-modules/*/tests',
         ],
     ])
     ->withPreparedSets(
