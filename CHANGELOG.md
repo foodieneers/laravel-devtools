@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-devtools` will be documented in this file.
 
+## Removed peck - 2026-03-19
+
+Removed peck
+
 ## Update to laravel 13 - 2026-03-19
 
 Updated to laravel 13
