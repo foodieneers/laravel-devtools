@@ -6,13 +6,16 @@ namespace Foodieneers\DevTools\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use Override;
 
 final class PublishDevTools extends Command
 {
+    #[Override]
     protected $signature = 'publish:devtools
                             {--force : Overwrite existing files without asking}
                             {--ask : Ask before overwriting files}';
 
+    #[Override]
     protected $description = 'Copy devtool config files from the package into this project';
 
     private array $files = [

@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace Foodieneers\DevTools\Commands;
 
 use Illuminate\Console\Command;
+use Override;
 
 final class AddComposerScripts extends Command
 {
+    #[Override]
     protected $signature = 'devtools:add-composer-scripts {--force : Overwrite existing scripts}';
 
+    #[Override]
     protected $description = 'Add standard lint and test scripts to composer.json';
 
     public function handle(): int
@@ -27,7 +30,7 @@ final class AddComposerScripts extends Command
         $scriptsToAdd = require __DIR__.'/../../stubs/composer-scripts.php';
 
         foreach ($scriptsToAdd as $name => $definition) {
-            if (! array_key_exists($name, $scripts) || $this->option('force')) {
+            if (! array_key_exists((string) $name, $scripts) || $this->option('force')) {
                 $scripts[$name] = $definition;
                 $this->info(
                     $this->option('force')
