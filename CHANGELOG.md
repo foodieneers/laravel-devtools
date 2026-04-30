@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-devtools` will be documented in this file.
 
+## v1.2.2 - 2026-04-30
+
+Pao in correct dependency
+
+**Full Changelog**: https://github.com/foodieneers/laravel-devtools/compare/v1.2.1...v1.2.2
+
 ## v1.2.1 - 2026-04-30
 
 ### What's Changed
