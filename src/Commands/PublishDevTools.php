@@ -4,20 +4,17 @@ declare(strict_types=1);
 
 namespace Foodieneers\DevTools\Commands;
 
+use Illuminate\Console\Attributes\Description;
+use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
-use Override;
 
+#[Description('Copy devtool config files from the package into this project')]
+#[Signature('publish:devtools
+                            {--force : Overwrite existing files without asking}
+                            {--ask : Ask before overwriting files}')]
 final class PublishDevTools extends Command
 {
-    #[Override]
-    protected $signature = 'publish:devtools
-                            {--force : Overwrite existing files without asking}
-                            {--ask : Ask before overwriting files}';
-
-    #[Override]
-    protected $description = 'Copy devtool config files from the package into this project';
-
     private array $files = [
         'pint' => 'pint.json',
         'peck' => 'peck.json',

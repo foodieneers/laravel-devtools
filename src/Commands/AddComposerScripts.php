@@ -4,17 +4,14 @@ declare(strict_types=1);
 
 namespace Foodieneers\DevTools\Commands;
 
+use Illuminate\Console\Attributes\Description;
+use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
-use Override;
 
+#[Description('Add standard lint and test scripts to composer.json')]
+#[Signature('devtools:add-composer-scripts {--force : Overwrite existing scripts}')]
 final class AddComposerScripts extends Command
 {
-    #[Override]
-    protected $signature = 'devtools:add-composer-scripts {--force : Overwrite existing scripts}';
-
-    #[Override]
-    protected $description = 'Add standard lint and test scripts to composer.json';
-
     public function handle(): int
     {
         $path = base_path('composer.json');
