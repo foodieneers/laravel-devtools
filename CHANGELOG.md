@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-devtools` will be documented in this file.
 
+## v1.2.3 - 2026-06-06
+
+Reverted signature and description from AddComposerScript
+
 ## v1.2.2 - 2026-04-30
 
 Pao in correct dependency
