@@ -26,7 +26,7 @@ it('adds the scripts when missing', function (): void {
         'scripts' => [],
     ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES).PHP_EOL);
 
-    artisan('devtools:add-composer-scripts')
+    artisan('devtools:composer-scripts')
         ->assertExitCode(0)
         ->expectsOutput('composer.json updated successfully.');
 
@@ -43,7 +43,7 @@ it('does not overwrite existing scripts by default', function (): void {
         ],
     ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES).PHP_EOL);
 
-    artisan('devtools:add-composer-scripts')
+    artisan('devtools:composer-scripts')
         ->assertExitCode(0)
         ->expectsOutput('Skipped existing script: lint');
 
@@ -60,7 +60,7 @@ it('overwrites existing scripts with --force', function (): void {
         ],
     ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES).PHP_EOL);
 
-    artisan('devtools:add-composer-scripts --force')
+    artisan('devtools:composer-scripts --force')
         ->assertExitCode(0)
         ->expectsOutput('Overwritten script: lint');
 
