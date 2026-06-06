@@ -11,11 +11,21 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 final class DevToolsServiceProvider extends PackageServiceProvider
 {
+    public $app;
+
     public function configurePackage(Package $package): void
     {
         $package
-            ->name('laravel-devtools')
-            ->hasCommand(PublishDevTools::class)
-            ->hasCommand(AddComposerScripts::class);
+            ->name('laravel-devtools');
+    }
+
+    public function bootingPackage(): void
+    {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                AddComposerScripts::class,
+                PublishDevTools::class,
+            ]);
+        }
     }
 }
