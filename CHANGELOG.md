@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-devtools` will be documented in this file.
 
+## v1.3.0 - 2026-07-12
+
+Added llm/skills
+
 ## v1.2.3 - 2026-06-06
 
 Reverted signature and description from AddComposerScript
