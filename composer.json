@@ -75,7 +75,7 @@
             "pest --parallel --coverage --exactly=100.0"
         ],
         "pest": "pest --profile",
-        "test:types": "phpstan",
+        "test:types": "phpstan --memory-limit=16G",
         "test": [
             "@test:type-coverage",
             "@test:unit",
