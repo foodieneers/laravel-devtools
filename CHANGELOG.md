@@ -3,6 +3,31 @@
 All notable changes to `laravel-devtools` will be documented in this file.
 
 <<<<<<< HEAD
+
+## v1.5.0 - 2026-08-11
+
+### Megafix
+
+- New php artisan devtools:install (publish + scripts)
+- README rewritten as the onboarding contract
+
+#### Cleanup
+
+- Removed dead Composer metadata (plugin class, facade, factories)
+- Fully dropped Peck (stub, publish entry, docs)
+- Removed placeholder ExampleTest
+
+#### Stubs
+
+- Pest, PHPUnit, and GitHub Actions workflow
+- Relative cache paths + stronger PHPStan config
+- npm scripts only when package.json exists
+
+#### Tests
+
+- Real filesystem coverage for publish/install
+- Arch split out of the coverage run (it was skewing totals)
+
 ## Unreleased
 
 - Add `devtools:install` to publish configs and Composer scripts in one step
@@ -11,11 +36,13 @@ All notable changes to `laravel-devtools` will be documented in this file.
 - Fix Rector/PHPStan cache paths; strengthen the PHPStan stub
 - Only add npm Composer scripts when `package.json` exists
 - Rewrite README as the onboarding contract
-=======
+  =======
+
 ## v1.4.0 - 2026-08-11
 
 Pest v5
->>>>>>> 50c5b4c200e211ced42ff8cb9cfa1ff9c2aea150
+
+> > > > > > > 50c5b4c200e211ced42ff8cb9cfa1ff9c2aea150
 
 ## v1.3.0 - 2026-07-12
 
