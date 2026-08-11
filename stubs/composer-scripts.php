@@ -24,7 +24,10 @@ return [
 
     'pest' => 'pest',
 
-    'test:unit' => 'pest --parallel --coverage --exactly=100.0',
+    'test:unit' => [
+        '@putenv XDEBUG_MODE=coverage',
+        'pest --parallel --coverage --exactly=100.0',
+    ],
 
     'test:types' => 'phpstan',
 

@@ -23,20 +23,24 @@
         "illuminate/contracts": "^11.0||^12.0||^13.0",
         "larastan/larastan": "^3.10.0",
         "laravel/boost": "^2.4.8",
+        "laravel/pao": "^1.0",
         "laravel/pint": "^1.29.1",
+        "llm/skills": "^1.9",
         "nunomaduro/collision": "^8.9.4",
-        "pestphp/pest": "^4.7.0",
-        "pestphp/pest-plugin-arch": "^4.0.2",
-        "pestphp/pest-plugin-browser": "^4.3.1",
-        "pestphp/pest-plugin-laravel": "^4.1",
-        "pestphp/pest-plugin-type-coverage": "^4.0.4",
+        "pestphp/pest": "^5.0",
+        "pestphp/pest-plugin-agent": "^5.0",
+        "pestphp/pest-plugin-arch": "^5.0",
+        "pestphp/pest-plugin-browser": "^5.0",
+        "pestphp/pest-plugin-evals": "^5.0",
+        "pestphp/pest-plugin-laravel": "^5.0",
+        "pestphp/pest-plugin-phpstan": "^5.0",
+        "pestphp/pest-plugin-rector": "^5.0",
+        "pestphp/pest-plugin-type-coverage": "^5.0",
         "phpstan/extension-installer": "^1.4.3",
         "phpstan/phpstan-deprecation-rules": "^2.0.4",
         "phpstan/phpstan-phpunit": "^2.0.16",
         "rector/rector": "^2.4.5",
         "spatie/laravel-package-tools": "^1.93",
-        "laravel/pao": "^1.0",
-        "llm/skills": "^1.9",
         "spatie/laravel-ray": "^1.43.9"
     },
     "require-dev": {
@@ -66,7 +70,10 @@
             "pint --parallel --test",
             "rector --dry-run"
         ],
-        "test:unit": "pest --parallel --coverage --exactly=100.0",
+        "test:unit": [
+            "@putenv XDEBUG_MODE=coverage",
+            "pest --parallel --coverage --exactly=100.0"
+        ],
         "pest": "pest --profile",
         "test:types": "phpstan",
         "test": [

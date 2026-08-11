@@ -6,11 +6,13 @@ namespace Foodieneers\DevTools;
 
 use Foodieneers\DevTools\Commands\AddComposerScripts;
 use Foodieneers\DevTools\Commands\PublishDevTools;
+use Override;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 final class DevToolsServiceProvider extends PackageServiceProvider
 {
+    #[Override]
     public $app;
 
     public function configurePackage(Package $package): void
