@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-devtools` will be documented in this file.
 
+## v1.4.0 - 2026-08-11
+
+Pest v5
+
 ## v1.3.0 - 2026-07-12
 
 Added llm/skills
