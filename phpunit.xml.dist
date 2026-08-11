@@ -16,8 +16,9 @@
     backupStaticProperties="false"
 >
     <testsuites>
-        <testsuite name="Foodieneers Test Suite">
+        <testsuite name="Unit">
             <directory>tests</directory>
+            <exclude>tests/ArchTest.php</exclude>
         </testsuite>
     </testsuites>
     <logging>

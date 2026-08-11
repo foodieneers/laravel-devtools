@@ -1,15 +1,16 @@
 {
     "name": "foodieneers/laravel-devtools",
-    "description": "Laravel package for dev tools ",
+    "description": "Foodieneers company-standard Laravel development toolkit (Pest, Pint, PHPStan, Rector, and related tooling).",
     "keywords": [
         "Foodieneers",
         "dev",
         "laravel",
-        "laravel-devtools"
+        "laravel-devtools",
+        "toolkit"
     ],
     "homepage": "https://github.com/foodieneers/laravel-devtools",
     "license": "MIT",
-    "type": "package",
+    "type": "library",
     "authors": [
         {
             "name": "Azzarip",
@@ -48,8 +49,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Foodieneers\\DevTools\\": "src/",
-            "Foodieneers\\DevTools\\Database\\Factories\\": "database/factories/"
+            "Foodieneers\\DevTools\\": "src/"
         }
     },
     "autoload-dev": {
@@ -72,13 +72,15 @@
         ],
         "test:unit": [
             "@putenv XDEBUG_MODE=coverage",
-            "pest --parallel --coverage --exactly=100.0"
+            "pest --testsuite=Unit --coverage --exactly=100.0"
         ],
+        "test:arch": "pest tests/ArchTest.php",
         "pest": "pest --profile",
         "test:types": "phpstan --memory-limit=16G",
         "test": [
             "@test:type-coverage",
             "@test:unit",
+            "@test:arch",
             "@test:lint",
             "@test:types"
         ]
@@ -92,14 +94,10 @@
         }
     },
     "extra": {
-        "class": "Foodieneers\\DevTools\\ComposerPlugin",
         "laravel": {
             "providers": [
                 "Foodieneers\\DevTools\\DevToolsServiceProvider"
-            ],
-            "aliases": {
-                "DevTools": "Foodieneers\\DevTools\\Facades\\DevTools"
-            }
+            ]
         }
     },
     "minimum-stability": "dev",

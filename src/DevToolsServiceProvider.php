@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Foodieneers\DevTools;
 
 use Foodieneers\DevTools\Commands\AddComposerScripts;
+use Foodieneers\DevTools\Commands\InstallDevTools;
 use Foodieneers\DevTools\Commands\PublishDevTools;
 use Override;
 use Spatie\LaravelPackageTools\Package;
@@ -26,6 +27,7 @@ final class DevToolsServiceProvider extends PackageServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 AddComposerScripts::class,
+                InstallDevTools::class,
                 PublishDevTools::class,
             ]);
         }

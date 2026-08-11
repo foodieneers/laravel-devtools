@@ -9,36 +9,48 @@ use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
-#[Description('Copy devtool config files from the package into this project')]
+#[Description('Copy Foodieneers devtool config files into this project')]
 #[Signature('publish:devtools {--force : Overwrite existing files without asking} {--ask : Ask before overwriting files}')]
 final class PublishDevTools extends Command
 {
+    /**
+     * @var array<string, string>
+     */
     private array $files = [
-        'pint' => 'pint.json',
-        'peck' => 'peck.json',
-        'phpstan' => 'phpstan.neon',
-        'rector' => 'rector.php',
+        'pint.json' => 'pint.json',
+        'phpstan.neon' => 'phpstan.neon',
+        'rector.php' => 'rector.php',
+        'Pest.php' => 'tests/Pest.php',
+        'phpunit.xml' => 'phpunit.xml',
+        'github-workflow.yml' => '.github/workflows/tests.yml',
     ];
 
     public function handle(): int
     {
         $projectRoot = base_path();
-        $stubsPath = realpath(__DIR__.'/../../stubs');
+        $stubsPath = __DIR__.'/../../stubs';
+
+        if (! File::isDirectory($stubsPath)) {
+            $this->error('Unable to locate package stubs directory.');
+
+            return self::FAILURE;
+        }
+
+        $stubsPath = realpath($stubsPath);
 
         foreach ($this->files as $source => $destination) {
-            $sourcePath = implode(DIRECTORY_SEPARATOR, [$stubsPath, $source]);
-            $destinationPath = implode(DIRECTORY_SEPARATOR, [$projectRoot, $destination]);
+            $sourcePath = $stubsPath.DIRECTORY_SEPARATOR.$source;
+            $destinationPath = $projectRoot.DIRECTORY_SEPARATOR.str_replace('/', DIRECTORY_SEPARATOR, $destination);
 
             if (File::exists($destinationPath)) {
-
                 if ($this->option('force')) {
-                    $this->overwrite($sourcePath, $destinationPath, $destination);
+                    $this->publish($sourcePath, $destinationPath, $destination);
 
                     continue;
                 }
 
                 if ($this->option('ask') && $this->confirm("File {$destination} already exists. Overwrite?", false)) {
-                    $this->overwrite($sourcePath, $destinationPath, $destination);
+                    $this->publish($sourcePath, $destinationPath, $destination);
 
                     continue;
                 }
@@ -48,16 +60,17 @@ final class PublishDevTools extends Command
                 continue;
             }
 
-            $this->overwrite($sourcePath, $destinationPath, $destination);
+            $this->publish($sourcePath, $destinationPath, $destination);
         }
 
-        $this->info('Devtools publishing completed ✅');
+        $this->info('Devtools publishing completed.');
 
         return self::SUCCESS;
     }
 
-    private function overwrite(string $sourcePath, string $destinationPath, string $destination): void
+    private function publish(string $sourcePath, string $destinationPath, string $destination): void
     {
+        File::ensureDirectoryExists(dirname($destinationPath));
         $this->info("Publishing: {$destination}");
         File::copy($sourcePath, $destinationPath);
     }

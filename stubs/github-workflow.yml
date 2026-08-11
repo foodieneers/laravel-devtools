@@ -1,4 +1,4 @@
-name: Package Full Test Analysis
+name: Tests
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  package-tests:
+  tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,7 +23,6 @@ jobs:
           tools: composer:v2
           coverage: xdebug
 
-      # Composer cache (speed)
       - name: Get Composer cache directory
         id: composer-cache
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
@@ -39,18 +38,10 @@ jobs:
       - name: Install Dependencies
         run: composer install --no-interaction --prefer-dist --no-progress
 
-      - name: Prepare testing cache directory
+      - name: Prepare cache directories
         run: |
-            mkdir -p storage/tmp/phpstan
-            mkdir -p storage/tmp/rector
-
-      - name: PHPStan Cache
-        uses: actions/cache@v6
-        with:
-          path: storage/tmp/phpstan
-          key: ${{ runner.os }}-phpstan-${{ hashFiles('**/composer.lock', '**/phpstan.neon*') }}
-          restore-keys: |
-            ${{ runner.os }}-phpstan-
+          mkdir -p storage/framework/cache/phpstan
+          mkdir -p storage/framework/cache/rector
 
       - name: Test Lint
         run: composer test:lint

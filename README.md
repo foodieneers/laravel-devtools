@@ -1,41 +1,69 @@
-# Laravel package for dev tools
+# Laravel DevTools
 
-All the php tooling and laravel tooling for handling applicatios development.
+Foodieneers company-standard Laravel development toolkit. One `--dev` dependency that wires Pest, Pint, PHPStan/Larastan, Rector, and related tooling into every app the same way.
+
+## Requirements
+
+- PHP 8.5+
+- Laravel 11, 12, or 13
 
 ## Installation
 
-You can install the package via composer:
-
 ```bash
 composer require foodieneers/laravel-devtools --dev
+php artisan devtools:install
 ```
 
-You can publish all the tooling configs as:
+That publishes the standard configs and adds the Composer scripts. Useful flags:
+
+- `--force` — overwrite existing config files and scripts
+- `--ask` — confirm before overwriting each config file
+
+You can still run the steps separately:
 
 ```bash
 php artisan publish:devtools
+php artisan devtools:composer-scripts
 ```
 
-With the flag `--force` it will overwrite all existing files.
+## What you get
 
-With the flag `--ask` it will overwrite depending on the answer of the user.
+| Tool | Role |
+| --- | --- |
+| Pest (+ Laravel, Arch, Type Coverage, Browser, Agent, Evals, PHPStan, Rector plugins) | Testing |
+| Laravel Pint | Code style |
+| Larastan / PHPStan | Static analysis |
+| Rector (+ Laravel & Pest sets) | Automated refactors |
+| Collision | Pretty CLI errors |
+| Laravel Boost | AI-assisted Laravel development |
+| Laravel Pao | Laravel PAO tooling |
+| Spatie Ray | Local debugging |
+| llm/skills | Shared LLM skills |
 
-## Instructions
+## Published files
 
-### Laravel Pint
+| Source stub | Destination |
+| --- | --- |
+| `pint.json` | `pint.json` |
+| `phpstan.neon` | `phpstan.neon` |
+| `rector.php` | `rector.php` |
+| `Pest.php` | `tests/Pest.php` |
+| `phpunit.xml` | `phpunit.xml` |
+| `github-workflow.yml` | `.github/workflows/tests.yml` |
+
+Composer scripts are PHP-only by default. If the app has a `package.json`, `lint`, `test:lint`, and `dep:bump` also include the matching npm steps.
+
+## Daily commands
 
 ```bash
+composer test          # type-coverage + unit + arch + lint + types
+composer lint          # rector + pint (+ npm lint when present)
+composer test:unit
+composer test:arch
+composer test:types
+composer test:lint
 ./vendor/bin/pint
-```
-
-```bash
-./vendor/bin/peck
-```
-
-## Testing
-
-```bash
-composer test
+./vendor/bin/pest
 ```
 
 ## Changelog

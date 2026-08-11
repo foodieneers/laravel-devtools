@@ -5,13 +5,11 @@ declare(strict_types=1);
 return [
     'dep:bump' => [
         'composer bump',
-        'npx npm-check-updates -u',
     ],
 
     'lint' => [
         'rector',
         'pint --parallel',
-        'npm run lint',
     ],
 
     'test:type-coverage' => 'pest --type-coverage --min=100',
@@ -19,23 +17,24 @@ return [
     'test:lint' => [
         'pint --parallel --test',
         'rector --dry-run',
-        'npm run test:lint',
     ],
 
     'pest' => 'pest',
 
     'test:unit' => [
         '@putenv XDEBUG_MODE=coverage',
-        'pest --parallel --coverage --exactly=100.0',
+        'pest --coverage --exactly=100.0',
     ],
+
+    'test:arch' => 'pest tests/ArchTest.php',
 
     'test:types' => 'phpstan',
 
     'test' => [
         '@test:type-coverage',
         '@test:unit',
+        '@test:arch',
         '@test:lint',
         '@test:types',
     ],
-
 ];
