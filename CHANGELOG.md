@@ -2,6 +2,7 @@
 
 All notable changes to `laravel-devtools` will be documented in this file.
 
+<<<<<<< HEAD
 ## Unreleased
 
 - Add `devtools:install` to publish configs and Composer scripts in one step
@@ -10,6 +11,11 @@ All notable changes to `laravel-devtools` will be documented in this file.
 - Fix Rector/PHPStan cache paths; strengthen the PHPStan stub
 - Only add npm Composer scripts when `package.json` exists
 - Rewrite README as the onboarding contract
+=======
+## v1.4.0 - 2026-08-11
+
+Pest v5
+>>>>>>> 50c5b4c200e211ced42ff8cb9cfa1ff9c2aea150
 
 ## v1.3.0 - 2026-07-12
 
