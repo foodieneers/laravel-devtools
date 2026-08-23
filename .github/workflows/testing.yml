@@ -41,22 +41,16 @@ jobs:
 
       - name: Prepare testing cache directory
         run: |
-            mkdir -p storage/tmp/phpstan
-            mkdir -p storage/tmp/rector
+            mkdir -p build/phpstan
+            mkdir -p /tmp/rector
 
       - name: PHPStan Cache
         uses: actions/cache@v6
         with:
-          path: storage/tmp/phpstan
+          path: build/phpstan
           key: ${{ runner.os }}-phpstan-${{ hashFiles('**/composer.lock', '**/phpstan.neon*') }}
           restore-keys: |
             ${{ runner.os }}-phpstan-
-
-      - name: Test Lint
-        run: composer test:lint
-
-      - name: Test Types
-        run: composer test:types
 
       - name: Test Type-Coverage
         run: composer test:type-coverage
@@ -64,5 +58,8 @@ jobs:
       - name: Test Unit
         run: composer test:unit
 
-      - name: Test Arch
-        run: composer test:arch
+      - name: Test Lint
+        run: composer test:lint
+
+      - name: Test Types
+        run: composer test:types
