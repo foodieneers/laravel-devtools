@@ -4,6 +4,11 @@ All notable changes to `laravel-devtools` will be documented in this file.
 
 <<<<<<< HEAD
 
+## v1.6 - 2026-08-23
+
+Moved namespace to Foodineers
++Github fix
+
 ## v1.5.0 - 2026-08-11
 
 ### Megafix
@@ -35,8 +40,8 @@ All notable changes to `laravel-devtools` will be documented in this file.
 - Drop Peck leftovers and dead Composer metadata (facade, Composer plugin, factories)
 - Fix Rector/PHPStan cache paths; strengthen the PHPStan stub
 - Only add npm Composer scripts when `package.json` exists
-- Rewrite README as the onboarding contract
-  =======
+- # Rewrite README as the onboarding contract
+  
 
 ## v1.4.0 - 2026-08-11
 
