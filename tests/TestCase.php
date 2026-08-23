@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Foodieneers\DevTools\Tests;
+namespace Foodineers\DevTools\Tests;
 
-use Foodieneers\DevTools\DevToolsServiceProvider;
+use Foodineers\DevTools\DevToolsServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 abstract class TestCase extends Orchestra

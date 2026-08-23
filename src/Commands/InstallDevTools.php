@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Foodieneers\DevTools\Commands;
+namespace Foodineers\DevTools\Commands;
 
 use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 
-#[Description('Install Foodieneers Laravel standard configs and Composer scripts')]
+#[Description('Install Foodineers Laravel standard configs and Composer scripts')]
 #[Signature('devtools:install {--force : Overwrite existing files and scripts without asking} {--ask : Ask before overwriting config files}')]
 final class InstallDevTools extends Command
 {

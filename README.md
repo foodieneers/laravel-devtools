@@ -1,6 +1,6 @@
 # Laravel DevTools
 
-Foodieneers company-standard Laravel development toolkit. One `--dev` dependency that wires Pest, Pint, PHPStan/Larastan, Rector, and related tooling into every app the same way.
+Foodineers company-standard Laravel development toolkit. One `--dev` dependency that wires Pest, Pint, PHPStan/Larastan, Rector, and related tooling into every app the same way.
 
 ## Requirements
 
@@ -10,7 +10,7 @@ Foodieneers company-standard Laravel development toolkit. One `--dev` dependency
 ## Installation
 
 ```bash
-composer require foodieneers/laravel-devtools --dev
+composer require foodineers/laravel-devtools --dev
 php artisan devtools:install
 ```
 

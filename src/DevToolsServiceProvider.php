@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Foodieneers\DevTools;
+namespace Foodineers\DevTools;
 
-use Foodieneers\DevTools\Commands\AddComposerScripts;
-use Foodieneers\DevTools\Commands\InstallDevTools;
-use Foodieneers\DevTools\Commands\PublishDevTools;
+use Foodineers\DevTools\Commands\AddComposerScripts;
+use Foodineers\DevTools\Commands\InstallDevTools;
+use Foodineers\DevTools\Commands\PublishDevTools;
 use Override;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;

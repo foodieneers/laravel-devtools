@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Foodieneers\DevTools\Commands;
+namespace Foodineers\DevTools\Commands;
 
 use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;

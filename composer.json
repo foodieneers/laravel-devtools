@@ -1,14 +1,14 @@
 {
-    "name": "foodieneers/laravel-devtools",
-    "description": "Foodieneers company-standard Laravel development toolkit (Pest, Pint, PHPStan, Rector, and related tooling).",
+    "name": "foodineers/laravel-devtools",
+    "description": "Foodineers company-standard Laravel development toolkit (Pest, Pint, PHPStan, Rector, and related tooling).",
     "keywords": [
-        "Foodieneers",
+        "Foodineers",
         "dev",
         "laravel",
         "laravel-devtools",
         "toolkit"
     ],
-    "homepage": "https://github.com/foodieneers/laravel-devtools",
+    "homepage": "https://github.com/foodineers/laravel-devtools",
     "license": "MIT",
     "type": "library",
     "authors": [
@@ -51,12 +51,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Foodieneers\\DevTools\\": "src/"
+            "Foodineers\\DevTools\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Foodieneers\\DevTools\\Tests\\": "tests/",
+            "Foodineers\\DevTools\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -98,7 +98,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Foodieneers\\DevTools\\DevToolsServiceProvider"
+                "Foodineers\\DevTools\\DevToolsServiceProvider"
             ]
         }
     },

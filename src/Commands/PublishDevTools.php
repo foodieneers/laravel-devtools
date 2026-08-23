@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Foodieneers\DevTools\Commands;
+namespace Foodineers\DevTools\Commands;
 
 use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
-#[Description('Copy Foodieneers devtool config files into this project')]
+#[Description('Copy Foodineers devtool config files into this project')]
 #[Signature('publish:devtools {--force : Overwrite existing files without asking} {--ask : Ask before overwriting files}')]
 final class PublishDevTools extends Command
 {

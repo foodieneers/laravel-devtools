@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Foodieneers\DevTools\Tests\TestCase;
+use Foodineers\DevTools\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);
 
